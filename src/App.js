@@ -1,8 +1,36 @@
+import { Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { publicRoutes } from './routes';
+import { DefauLayout } from './components/Layout';
+
 function App() {
     return (
-        <div className="App">
-            <h1>Chan khong buon noi</h1>
-        </div>
+        <Router>
+            <div className="App">
+                <Routes>
+                    {publicRoutes.map((route, index) => {
+                        const Page = route.component;
+                        let Layout = DefauLayout;
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            Layout = Fragment;
+                        }
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            ></Route>
+                        );
+                    })}
+                </Routes>
+            </div>
+        </Router>
     );
 }
 
