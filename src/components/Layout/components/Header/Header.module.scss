@@ -22,8 +22,13 @@
     height: 361px;
 }
 
+.search-result {
+    width: 350px;
+}
+
 .search {
     position: relative;
+    width: 350px;
     height: var(--search-height);
     padding-left: 16px;
     display: flex;
@@ -86,4 +91,16 @@
     &:active {
         background: rgba(22, 24, 35, 0.06);
     }
+}
+
+.menu-items {
+    width: 224px;
+}
+
+.more-btn {
+    font-size: 2rem;
+    cursor: pointer;
+    margin-left: 28px;
+    padding: 4px 9px;
+    background-color: transparent;
 }
