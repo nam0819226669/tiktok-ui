@@ -22,6 +22,7 @@ import Button from 'components/Button';
 
 import style from './Header.module.scss';
 import images from 'assets/images';
+import Image from 'components/Image';
 import { useEffect, useState } from 'react';
 import { Wrapper as PopperWrapper } from 'components/Popper';
 import Menu from 'components/Popper/Menu';
@@ -153,11 +154,12 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/db98b6beb8892a5a6a19d881a4a5dcc1~c5_100x100.jpeg?x-expires=1701338400&x-signature=Qqv5UJ98aZV3KtzcouvXh3xKvYM%3D"
+                                src=""
+                                // src="https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/db98b6beb8892a5a6a19d881a4a5dcc1~c5_100x100.jpeg?x-expires=1701338400&x-signature=Qqv5UJ98aZV3KtzcouvXh3xKvYM%3D"
                                 alt="Nguyen Van B"
-                            ></img>
+                            />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
