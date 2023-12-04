@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 
+import * as serchServices from '../../../../apiServices/searchServices';
+
 import classNames from 'classnames/bind';
 import style from './Search.module.scss';
 
@@ -8,6 +10,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import AccountItem from '../../../AccountItem/index';
 import { faSpinner, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { SearchIcon } from 'components/Icons';
+import { useDebounce } from 'hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const cx = classNames.bind(style);
 
@@ -16,34 +19,37 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [showResults, setShowResults] = useState(true);
     const [loading, setLoading] = useState(false);
+
+    const debounced = useDebounce(searchValue, 500);
+
     const inputRef = useRef();
-    const handleClear = () => {
-        setSearchValue('');
-        setSearchResult([]);
-        inputRef.current.focus();
-    };
+
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
-        setLoading(true);
+        const fetchApi = async () => {
+            setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                searchResult(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
-    }, [searchValue]);
+            const result = await serchServices.search(debounced);
+            setSearchResult(result);
+
+            setLoading(false);
+        };
+        fetchApi();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debounced]);
 
     const handleHideResult = () => {
         setShowResults(false);
     };
 
+    const handleClear = () => {
+        setSearchValue('');
+        setSearchResult([]);
+        inputRef.current.focus();
+    };
     return (
         <HeadlessTippy
             interactive
