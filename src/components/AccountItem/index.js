@@ -7,9 +7,8 @@ import Image from 'components/Image';
 const cx = classNames.bind(style);
 
 function AccountItem({ data }) {
-    console.log(data.avatar);
     return (
-        <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
+        <Link to={`/@/${data.nickname}`} className={cx('wrapper')}>
             <Image className={cx('avata')} src={data.avatar} alt={data.first_name} />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
