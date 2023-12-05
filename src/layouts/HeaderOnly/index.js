@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 
-function DefauLayout({ children }) {
+function DefaultLayout({ children }) {
     return (
         <div>
             <Header></Header>
@@ -11,4 +11,4 @@ function DefauLayout({ children }) {
     );
 }
 
-export default DefauLayout;
+export default DefaultLayout;

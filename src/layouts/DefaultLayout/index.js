@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 
 const cx = classNames.bind(style);
 
-function DefauLayout({ children }) {
+function DefaultLayout({ children }) {
     return (
         <div className={cx('wrapper')}>
             <Header></Header>
@@ -18,4 +18,4 @@ function DefauLayout({ children }) {
     );
 }
 
-export default DefauLayout;
+export default DefaultLayout;
