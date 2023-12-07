@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-
-import * as serchServices from './../../../services/searchServices';
+import * as searchServices from './../../../services/searchServices';
 
 import classNames from 'classnames/bind';
 import style from './Search.module.scss';
@@ -17,9 +16,8 @@ const cx = classNames.bind(style);
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResults, setShowResults] = useState(true);
+    const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const debounced = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
@@ -32,7 +30,7 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await serchServices.search(debounced);
+            const result = await searchServices.search(debounced);
             setSearchResult(result);
 
             setLoading(false);
@@ -80,7 +78,6 @@ function Search() {
                     <input
                         ref={inputRef}
                         value={searchValue}
-                        type="input"
                         placeholder="Search accounts and videos"
                         spellCheck={false}
                         onChange={handleChange}

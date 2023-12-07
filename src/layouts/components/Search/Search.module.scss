@@ -32,6 +32,7 @@
     &::after {
         content: '';
         position: absolute;
+        padding-right: 40px;
         top: var(--search-top-spacer);
         right: var(--search-button-width);
         width: 1px;
